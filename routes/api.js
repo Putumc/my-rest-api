@@ -27,6 +27,13 @@ const {
     cekKey,
     checkLimit
 } = require('../MongoDB/function');
+var {
+  ytDonlodMp3,
+  ytDonlodMp4,
+  ytPlayMp3,
+  ytPlayMp4,
+  ytSearch
+} = require("./../lib/utils/yt");
 
 const scr = require('@bochilteam/scraper')
 const {
