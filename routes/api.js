@@ -439,25 +439,16 @@ router.get('/download/ytmp4', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    const {
-        id,
-        thumbnail,
-        video: _video,
-        title
-    } = await scr.youtubedlv2(url)
-    try {
-        for (let i in _video) {
-            video = _video[i]
-            let kin = await video.download()
-            res.json({
-                id: id,
-                thumbnail: thumbnail,
-                title: title,
-                size: video.fileSize,
-                download: kin
-            })
-        }
-    } catch {
+    ytDonlodMp4(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch(e => {
         console.log(e);
         res.json(loghandler.error)
     }
