@@ -921,10 +921,7 @@ let result = anu[Math.floor(Math.random() * anu.length)]
         res.set('Content-Type', 'image/png');
         res.send(body);
     })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+        
     limitAdd(apikey)
 })
 
