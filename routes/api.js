@@ -886,7 +886,7 @@ router.get('/search/wallpaper', async (req, res, next) => {
             res.json({
                 result
             })
-        })
+        }) 
         .catch(e => {
             console.log(e);
             res.json(loghandler.error)
@@ -913,18 +913,18 @@ router.get('/search/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    scr.pinterest(text)
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
+    let { pinterest } = require('./lib/scraper')
+let anu = await pinterest(text)
+let result = anu[Math.floor(Math.random() * anu.length)]
+    request(result, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    })
         .catch(e => {
             console.log(e);
             res.json(loghandler.error)
         })
-    limitAdd(apikey);
+    limitAdd(apikey)
 })
 
 //nsfw
