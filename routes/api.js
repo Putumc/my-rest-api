@@ -396,26 +396,18 @@ router.get('/download/ytmp3', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    const {
-        id,
-        thumbnail,
-        audio: _audio,
-        title
-    } = await scr.youtubedlv2(url)
     try {
-        for (let i in _audio) {
-            audio = _audio[i]
-            let kin = await audio.download()
-            res.json({
-                id: id,
-                thumbnail: thumbnail,
-                title: title,
-                size: audio.fileSize,
-                download: kin
-            })
-        }
+    ytDonlodMp3(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
     } catch {
-        console.log(e);
+        console.log(e)
         res.json(loghandler.error)
     }
     limitAdd(apikey);
