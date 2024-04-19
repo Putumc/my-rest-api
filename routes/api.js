@@ -396,7 +396,6 @@ router.get('/download/ytmp3', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    try {
     ytDonlodMp3(url)
     .then((result) => {
       res.json({
@@ -406,10 +405,10 @@ router.get('/download/ytmp3', async (req, res, next) => {
         result
       })
     })
-    } catch {
-        console.log(e)
-        res.json(loghandler.error)
-    }
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
     limitAdd(apikey);
 })
 
