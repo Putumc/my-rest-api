@@ -21,6 +21,7 @@ var request = require('request');
 var fs = require('fs');
 var router = express.Router();
 var creator = global.creator
+var { pinterest } = require('./../lib/scraper')
 const {
     limitAdd,
     isLimit,
@@ -913,7 +914,7 @@ router.get('/search/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let { pinterest } = require('./lib/scraper')
+    
 let anu = await pinterest(text)
 let result = anu[Math.floor(Math.random() * anu.length)]
     request(result, function (error, response, body) {
