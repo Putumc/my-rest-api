@@ -165,7 +165,7 @@ router.get('/cecan/indonesia', async (req, res, next) => {
     });
     var data = ["https://api.miftahganzz.my.id/api/random/asupanrandom?type=video&apikey=zex"] 
     var requestSettings = {
-        url: videoUrl,
+        url: data,
         method: 'GET',
         encoding: null
     };
