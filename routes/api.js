@@ -380,7 +380,7 @@ router.get('/download/tiktok', async (req, res, next) => {
   nowm,
   wm,
   wm_hdplay
-  } = result.url
+  } = ttlu.url
         
         request(wm, function (error, response, body) {
         res.set('Content-Type', 'video/mp4');
