@@ -1,4 +1,7 @@
-// Gada reupload" 😏
+let gis = require('g-i-s')
+gis(text, async (error, result) => {
+n = result
+images = n[Math.floor(Math.random() * n.length)].url// Gada reupload" 😏
 // Klo mau colong fitur, jgn asal colong bodoh ntr api lu eror
 
 // Thanks to ( jgn di hapus jamet)
@@ -19,6 +22,7 @@ var axios = require('axios');
 const jerofc = require('api-jer');
 var fetch = require('node-fetch');
 var request = require('request');
+var gis = require('g-i-s')    
 var fs = require('fs');
 var router = express.Router();
 var creator = global.creator
@@ -852,19 +856,21 @@ router.get('/search/google-image', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    scr.googleImage(text).then(data => {
-            var data = data;
-            res.json({
-                status: 200,
-                data,
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+gis(text, async (error, result) => {
+var n = result
+var images = n[Math.floor(Math.random() * n.length)].url
+    var requestSettings = {
+        url: images,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    })
+        
     limitAdd(apikey);
-})
+}})
 router.get('/search/wallpaper', async (req, res, next) => {
     var apikey = req.query.apikey
     var text = req.query.query
