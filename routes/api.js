@@ -19,7 +19,9 @@ var axios = require('axios');
 const jerofc = require('api-jer');
 var fetch = require('node-fetch');
 var request = require('request');
-var gis = require('g-i-s')    
+var gis = require('g-i-s')  
+var FormData = require("form-data");
+var Jimp = require("jimp");
 var fs = require('fs');
 var router = express.Router();
 var creator = global.creator
@@ -346,17 +348,60 @@ router.get('/download/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    scr.pinterest(url)
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    async function processing(urlPath, method) {
+  return new Promise(async (resolve, reject) => {
+    let Methods = ["enhance", "recolor", "dehaze"];
+    Methods.includes(method) ? (method = method) : (method = Methods[0]);
+    let buffer,
+      Form = new FormData(),
+      scheme = "https" + "://" + "inferenceengine" + ".vyro" + ".ai/" + method;
+    Form.append("model_version", 1, {
+      "Content-Transfer-Encoding": "binary",
+      contentType: "multipart/form-data; charset=uttf-8",
+    });
+    Form.append("image", Buffer.from(urlPath), {
+      filename: "enhance_image_body.jpg",
+      contentType: "image/jpeg",
+    });
+    Form.submit(
+      {
+        url: scheme,
+        host: "inferenceengine" + ".vyro" + ".ai",
+        path: "/" + method,
+        protocol: "https:",
+        headers: {
+          "User-Agent": "okhttp/4.9.3",
+          Connection: "Keep-Alive",
+          "Accept-Encoding": "gzip",
+        },
+      },
+      function (err, res) {
+        if (err) reject();
+        let data = [];
+        res
+          .on("data", function (chunk, resp) {
+            data.push(chunk);
+          })
+          .on("end", () => {
+            resolve(Buffer.concat(data));
+          });
+        res.on("error", (e) => {
+          reject();
+        });
+      },
+    );
+  });
+}
+var This = await processing(url, "enhance");
+    var requestSettings = {
+        url: This,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/jpg');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 router.get('/download/tiktok', async (req, res, next) => {
