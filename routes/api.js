@@ -867,7 +867,8 @@ var images = n[Math.floor(Math.random() * n.length)].url
     })
         
     limitAdd(apikey);
-}})
+}
+})    
 router.get('/search/wallpaper', async (req, res, next) => {
     var apikey = req.query.apikey
     var text = req.query.query
