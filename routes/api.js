@@ -348,7 +348,7 @@ router.get('/download/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}"] 
+var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=https://telegra.ph/file/01c6a47beb39a64788057.png"] 
     var result = data[Math.floor(Math.random() * data.length)];
     var requestSettings = {
         url: result,
@@ -898,17 +898,19 @@ router.get('/search/wallpaper', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    scr.wallpaper(text)
-        .then(data => {
-            var result = data;
+    ytSearch(query)
+        .then((result) => {
             res.json({
-                result
+              status: true,
+              code: 200,
+              creator: `${creator}`,
+              result
             })
-        }) 
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
         })
+        .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
     limitAdd(apikey);
 })
 router.get('/search/pinterest', async (req, res, next) => {
