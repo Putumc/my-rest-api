@@ -374,20 +374,21 @@ router.get('/download/tiktok', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let ttlu = await jerofc.jertiktok(url) 
-    if (ttlu) {
-        var {
-  nowm,
-  wm,
-  wm_hdplay
-  } = ttlu.url
-        
-        request(wm, function (error, response, body) {
+    var response = await fetch(`https://aemt.me/download/tikdl?url=${url}`);
+    var data = await response.json();
+    var { nowm: video, audio } = data.result.url;
+    var requestSettings = {
+        url: video,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
         res.set('Content-Type', 'video/mp4');
         res.send(body);
-        });  
+    });
+
     limitAdd(apikey);
-}}) 
+})
 
 router.get('/download/ytmp3', async (req, res, next) => {
     var apikey = req.query.apikey
