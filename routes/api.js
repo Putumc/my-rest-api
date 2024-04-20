@@ -165,8 +165,9 @@ router.get('/cecan/indonesia', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     var data = ["https://api.miftahganzz.my.id/api/random/asupanrandom?type=video&apikey=zex"] 
+    var result = data[Math.floor(Math.random() * data.length)];
     var requestSettings = {
-        url: data,
+        url: result,
         method: 'GET',
         encoding: null
     };
@@ -279,14 +280,18 @@ router.get('/download/facebook', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    const result = await scr.savefrom(url)
-    res.json({
-            result
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    var response = await fetch(`https://aemt.me/download/fbdl?url=${url}`);
+    var data = await response.json();
+    var { HD: video, audio } = data.result.url;
+    var requestSettings = {
+        url: video,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'video/mp4');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 router.get('/download/instagram', async (req, res, next) => {
