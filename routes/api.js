@@ -375,14 +375,16 @@ router.get('/download/tiktok', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     let ttlu = await jerofc.jertiktok(url) 
-    var result = ttlu;
-    res.json({
-            result
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    if (ttlu) {
+        let {
+  nowm,
+  wm,
+  wm_hdplay
+  } = result.url
+        request(result.url, function (error, response, body) {
+        res.set('Content-Type', 'video/mp4'');
+        res.send(body);
+        }  
     limitAdd(apikey);
 })
 router.get('/download/ytmp3', async (req, res, next) => {
@@ -919,7 +921,7 @@ router.get('/search/pinterest', async (req, res, next) => {
 let anu = await pinterest(text)
 let result = anu[Math.floor(Math.random() * anu.length)]
     request(result, function (error, response, body) {
-        res.set('Content-Type', 'image/png');
+        res.set('Content-Type', 'image/jpg');
         res.send(body);
     })
         
