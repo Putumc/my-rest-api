@@ -282,7 +282,7 @@ router.get('/download/facebook', async (req, res, next) => {
     });
     var response = await fetch(`https://aemt.me/download/fbdl?url=${url}`);
     var data = await response.json();
-    var { HD: video, audio } = data.result.url;
+    var { HD: video, audio } = data.result;
     var requestSettings = {
         url: video,
         method: 'GET',
