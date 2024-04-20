@@ -898,7 +898,7 @@ router.get('/search/wallpaper', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    ytSearch(query)
+    ytSearch(text)
         .then((result) => {
             res.json({
               status: true,
