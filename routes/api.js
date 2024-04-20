@@ -1,4 +1,4 @@
- Gada reupload" 😏
+// Gada reupload" 😏
 // Klo mau colong fitur, jgn asal colong bodoh ntr api lu eror
 
 // Thanks to ( jgn di hapus jamet)
@@ -376,7 +376,7 @@ router.get('/download/tiktok', async (req, res, next) => {
     });
     let ttlu = await jerofc.jertiktok(url) 
     if (ttlu) {
-        let {
+        var {
   nowm,
   wm,
   wm_hdplay
