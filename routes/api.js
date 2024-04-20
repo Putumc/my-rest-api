@@ -163,7 +163,7 @@ router.get('/cecan/indonesia', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var data = ["https://api.miftahganzz.my.id/api/random/asupanrandom?type=video&apikey=zex" 
+    var data = ["https://api.miftahganzz.my.id/api/random/asupanrandom?type=video&apikey=zex"] 
     var requestSettings = {
         url: videoUrl,
         method: 'GET',
