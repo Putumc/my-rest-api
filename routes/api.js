@@ -16,6 +16,7 @@ __path = process.cwd();
 require('../settings.js');
 var express = require('express');
 var axios = require('axios');
+const jerofc = require('api-jer');
 var fetch = require('node-fetch');
 var request = require('request');
 var fs = require('fs');
@@ -373,7 +374,7 @@ router.get('/download/tiktok', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let ttlu = await scr.tiktokdl(url).catch(async _ => await scr.tiktokdlv2(url))
+    let ttlu = await jerofc.jertiktok(url) 
     var result = ttlu;
     res.json({
             result
