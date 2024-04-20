@@ -356,7 +356,7 @@ var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}"]
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'video/mp4');
+        res.set('Content-Type', 'image/png');
         res.send(body);
     });
 
