@@ -1,7 +1,4 @@
-let gis = require('g-i-s')
-gis(text, async (error, result) => {
-n = result
-images = n[Math.floor(Math.random() * n.length)].url// Gada reupload" 😏
+ Gada reupload" 😏
 // Klo mau colong fitur, jgn asal colong bodoh ntr api lu eror
 
 // Thanks to ( jgn di hapus jamet)
