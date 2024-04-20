@@ -386,8 +386,8 @@ router.get('/download/tiktok', async (req, res, next) => {
         res.send(body);
         })  
     limitAdd(apikey);
-})
-}
+}}) 
+
 router.get('/download/ytmp3', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.url
