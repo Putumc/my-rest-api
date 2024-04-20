@@ -381,7 +381,8 @@ router.get('/download/tiktok', async (req, res, next) => {
   wm,
   wm_hdplay
   } = result.url
-        request(result.url, function (error, response, body) {
+        
+        request(wm, function (error, response, body) {
         res.set('Content-Type', 'video/mp4');
         res.send(body);
         });  
