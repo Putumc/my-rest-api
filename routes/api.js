@@ -919,10 +919,15 @@ router.get('/search/pinterest', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     
-let anu = await pinterest(text)
-let result = anu[Math.floor(Math.random() * anu.length)]
-    request(result, function (error, response, body) {
-        res.set('Content-Type', 'image/jpg');
+var anu = await pinterest(text)
+var result = anu[Math.floor(Math.random() * anu.length)]
+    var requestSettings = {
+        url: result,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
         res.send(body);
     })
         
