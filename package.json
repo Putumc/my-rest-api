@@ -43,6 +43,7 @@
     "fluent-ffmpeg": "^2.1.2",
     "file-type": "^16.1.0",
     "jsonwebtoken": "^8.5.1",
+    "jsdom": "^20.0.0",
     "skh-api": "^1.0.0",
     "api-rey": "1.1.0",
     "os":"^0.1.2", 
