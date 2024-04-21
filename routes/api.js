@@ -319,8 +319,8 @@ router.get('/download/ttsearch', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 
-      var res = await ttSearch(url);
-    var hasil = res.videos
+      var tt = await ttSearch(url);
+    var hasil = tt.videos
       .map(
         (v, index) =>
           `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`,
@@ -331,6 +331,10 @@ router.get('/download/ttsearch', async (req, res, next) => {
         creator: `${creator}`,
         hasil
       })
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
     limitAdd(apikey);
 })
 router.get('/download/pinterest', async (req, res, next) => {
