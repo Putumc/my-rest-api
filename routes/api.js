@@ -427,19 +427,18 @@ router.get('/download/ytmp3', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    ytDonlodMp3(url)
-    .then((result) => {
-      res.json({
-        status: true,
-        code: 200,
-        creator: `${creator}`,
-        result
-      })
-    })
-    .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+        var response = await fetch(`https://nue-api.vercel.app/api/ytmp3?url=${url}`);
+    var data = await response.json();
+    var { download: ytmp3 } = data.result;
+    var requestSettings = {
+        url: ytmp3,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'audio/mp3');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 
