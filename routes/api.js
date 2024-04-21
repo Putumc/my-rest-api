@@ -321,10 +321,7 @@ router.get('/download/ttsearch', async (req, res, next) => {
 
       var tt = await ttSearch(url);
     var hasil = tt.videos
-      .map(
-        (v, index) =>
-          `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`
-      )   
+       
     .then((hasil) => {
     res.json({
         status: true,
