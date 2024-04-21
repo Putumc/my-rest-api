@@ -27,6 +27,7 @@ var router = express.Router();
 var creator = global.creator
 var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
+const { ttSearch } = require('./../lib/utils/api.js');
 const {
     limitAdd,
     isLimit,
@@ -297,7 +298,7 @@ router.get('/download/facebook', async (req, res, next) => {
     });
     limitAdd(apikey);
 })
-router.get('/download/instagram', async (req, res, next) => {
+router.get('/download/ttsearch', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.url
     if (!apikey) return res.json(loghandler.noapikey)
@@ -318,15 +319,13 @@ router.get('/download/instagram', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 
-    let iglu = await scr.instagramdl(url).catch(async _ => await scr.instagramdlv2(url)).catch(async _ => await scr.instagramdlv3(url)).catch(async _ => await scr.instagramdlv4(url))
-    var result = iglu;
-    res.json({
-            result
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+      var res = await ttSearch(text);
+    var hasil = res.videos
+      .map(
+        (v, index) =>
+          `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`,
+      )
+    res.send(hasil);
     limitAdd(apikey);
 })
 router.get('/download/pinterest', async (req, res, next) => {
@@ -357,9 +356,9 @@ if (data.length > 0) {
       for (let i = 0; i < data.length; i++) {
           if (!data[i].endsWith(".svg")) {
             
-    var result = data[Math.floor(Math.random() * data.length)];
+    var result = data[i][Math.floor(Math.random() * data[i].length)];
     var requestSettings = {
-        url: data[i],
+        url: result,
         method: 'GET',
         encoding: null
     };
