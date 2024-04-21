@@ -325,12 +325,14 @@ router.get('/download/ttsearch', async (req, res, next) => {
         (v, index) =>
           `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`,
       )
+    .then((hasil) => {
     res.json({
         status: true,
         code: 200,
         creator: `${creator}`,
         hasil
       })
+    })  
     .catch(e => {
             console.log(e);
             res.json(loghandler.error)
