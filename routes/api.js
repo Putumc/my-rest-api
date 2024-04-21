@@ -1651,8 +1651,8 @@ router.get('/other/ssweb', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-   
-var krt = await ssweb(text)
+   var global.sh = ${text}
+var krt = await ssweb(global.sh)
     var requestSettings = {
         url: krt.result,
         method: 'GET',
