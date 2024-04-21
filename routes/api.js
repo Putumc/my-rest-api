@@ -1692,18 +1692,20 @@ router.get('/other/kbbi', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://kbbi-api-zhirrr.vercel.app/api/kbbi?text=${text}`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    let response = await fetch('https://raw.githubusercontent.com/BotzIky/DJ-Viral/main/database.json');
+        var data = await response.json();
+        var randomIndex = Math.floor(Math.random() * data.results.length);
+        var randomResult = data.results[randomIndex];
+        var downloadLink = randomResult.download;
+    var requestSettings = {
+        url: downloadLink,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'audio/mp3');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 
