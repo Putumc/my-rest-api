@@ -356,17 +356,9 @@ router.get('/download/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-   var res = new BingImageCreator({
-      cookie: `_U=1fheZbxM2fl35zkqVcCXon52ty_orHC3gletEr3D6dJ19_SqgvcNY2Exxy31K3WOSKqut1EgffzW8lnCSvDPFF97Fzj92ao-Ss6PH3-6e_6d7P7yQcvPjfPIXOKyc1hzQAUlbNVhWmKqPcrhhZ9etBy8Nx9WRoUSuOQobzhgTJ8WA8jl06ES_YgCxfFfgtR-vuiwWPEDYdXqtLELQdGsUPw`,
-    }); 
-    var data = await res.createImage(url);
-if (data.length > 0) {
-      for (let i = 0; i < data.length; i++) {
-          if (!data[i].endsWith(".svg")) {
-            
-    var result = data[i][Math.floor(Math.random() * data[i].length)];
+   var response = await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`);
     var requestSettings = {
-        url: data,
+        url: response,
         method: 'GET',
         encoding: null
     };
@@ -376,7 +368,7 @@ if (data.length > 0) {
     });
 
     limitAdd(apikey);
-}}}
+
 })
 router.get('/download/tiktok', async (req, res, next) => {
     var apikey = req.query.apikey
