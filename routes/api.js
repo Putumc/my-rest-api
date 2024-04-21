@@ -16,7 +16,7 @@ __path = process.cwd();
 require('../settings.js');
 var express = require('express');
 var axios = require('axios');
-const jerofc = require('api-jer');
+var jerofc = require('api-jer');
 var fetch = require('node-fetch');
 var request = require('request');
 var gis = require('g-i-s')  
@@ -27,7 +27,7 @@ var router = express.Router();
 var creator = global.creator
 var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
-const { ttSearch } = require('./../lib/utils/api.js');
+var { ttSearch } = require('./../lib/utils/api.js');
 const {
     limitAdd,
     isLimit,
