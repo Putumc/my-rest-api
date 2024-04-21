@@ -319,7 +319,7 @@ router.get('/download/ttsearch', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 
-      var res = await ttSearch(text);
+      var res = await ttSearch(url);
     var hasil = res.videos
       .map(
         (v, index) =>
