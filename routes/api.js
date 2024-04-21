@@ -1633,7 +1633,7 @@ router.get('/other/tiktokaudio', async (req, res, next) => {
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'audio/mp4');
+        res.set('Content-Type', 'audio/mp3');
         res.send(body);
     });
     limitAdd(apikey);
