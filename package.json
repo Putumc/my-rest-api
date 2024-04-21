@@ -60,6 +60,7 @@
     "request": "^2.88.2",
     "terminal-image": "^2.0.0",
     "undici": "^6.6.2",
+    "qs": "^6.11.2",
     "fake-useragent": "^1.0.1",
     "g-i-s": "^2.1.6",
     "api-jer": "^2.2.8",
