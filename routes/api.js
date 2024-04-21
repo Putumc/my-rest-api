@@ -25,6 +25,7 @@ var Jimp = require("jimp");
 var fs = require('fs');
 var router = express.Router();
 var creator = global.creator
+var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
 const {
     limitAdd,
@@ -348,10 +349,17 @@ router.get('/download/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=https://telegra.ph/file/01c6a47beb39a64788057.png"] 
+   var res = new BingImageCreator({
+      cookie: `_U=1fheZbxM2fl35zkqVcCXon52ty_orHC3gletEr3D6dJ19_SqgvcNY2Exxy31K3WOSKqut1EgffzW8lnCSvDPFF97Fzj92ao-Ss6PH3-6e_6d7P7yQcvPjfPIXOKyc1hzQAUlbNVhWmKqPcrhhZ9etBy8Nx9WRoUSuOQobzhgTJ8WA8jl06ES_YgCxfFfgtR-vuiwWPEDYdXqtLELQdGsUPw`,
+    }); 
+    var data = await res.createImage(url);
+if (data.length > 0) {
+      for (let i = 0; i < data.length; i++) {
+          if (!data[i].endsWith(".svg")) {
+            
     var result = data[Math.floor(Math.random() * data.length)];
     var requestSettings = {
-        url: result,
+        url: data[i],
         method: 'GET',
         encoding: null
     };
@@ -361,6 +369,7 @@ var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=https://te
     });
 
     limitAdd(apikey);
+}}}
 })
 router.get('/download/tiktok', async (req, res, next) => {
     var apikey = req.query.apikey
