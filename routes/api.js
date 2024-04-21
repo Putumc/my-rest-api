@@ -28,6 +28,7 @@ var creator = global.creator
 var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
 var { ttSearch } = require('./../lib/utils/api.js');
+var { ssweb } = require('./../lib/utils/ssweb (1).js');
 const {
     limitAdd,
     isLimit,
@@ -1630,9 +1631,9 @@ router.get('/other/tiktokaudio', async (req, res, next) => {
     });
     limitAdd(apikey);
 })
-router.get('/other/covid-world', async (req, res, next) => {
+router.get('/other/ssweb', async (req, res, next) => {
     var apikey = req.query.apikey
-    var text = req.query.kata
+    var text = req.query.query
     if (!apikey) return res.json(loghandler.noapikey)
     if (!text) return res.json({
         status: false,
@@ -1650,18 +1651,17 @@ router.get('/other/covid-world', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://covid19-api-zhirrr.vercel.app/api/world`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+   
+var krt = await ssweb(text)
+    var requestSettings = {
+        url: krt,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 router.get('/other/kbbi', async (req, res, next) => {
