@@ -1624,11 +1624,11 @@ router.get('/other/tiktokaudio', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var response = await fetch(`https://api.lolhuman.xyz/api/tiktokmusic?apikey=gatadios&url=${text}`);
+    var response = await fetch(`https://aemt.me/download/tikdl?url=${text}`);
     var data = await response.json();
-    var { result: video } = data.result;
+    var { nowm: video, audio } = data.result.url;
     var requestSettings = {
-        url: video,
+        url: audio,
         method: 'GET',
         encoding: null
     };
