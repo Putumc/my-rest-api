@@ -356,7 +356,7 @@ var data = ["https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=https://te
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'image/jpg');
+        res.set('Content-Type', 'image/png');
         res.send(body);
     });
 
@@ -878,7 +878,7 @@ var images = n[Math.floor(Math.random() * n.length)].url
     limitAdd(apikey);
 }) 
 })    
-router.get('/search/wallpaper', async (req, res, next) => {
+router.get('/search/yts', async (req, res, next) => {
     var apikey = req.query.apikey
     var text = req.query.query
     if (!apikey) return res.json(loghandler.noapikey)
