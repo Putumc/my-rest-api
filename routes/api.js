@@ -323,8 +323,9 @@ router.get('/download/ttsearch', async (req, res, next) => {
     var hasil = tt.videos
       .map(
         (v, index) =>
-          `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`,
+          `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`
       )
+    .join("\n\n");   
     .then((hasil) => {
     res.json({
         status: true,
@@ -369,7 +370,7 @@ if (data.length > 0) {
             
     var result = data[i][Math.floor(Math.random() * data[i].length)];
     var requestSettings = {
-        url: result,
+        url: data,
         method: 'GET',
         encoding: null
     };
