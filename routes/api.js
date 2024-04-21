@@ -1604,9 +1604,9 @@ router.get('/other/hilih', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/other/kodepos', async (req, res, next) => {
+router.get('/other/tiktokaudio', async (req, res, next) => {
     var apikey = req.query.apikey
-    var text = req.query.kota
+    var text = req.query.query
     if (!apikey) return res.json(loghandler.noapikey)
     if (!text) return res.json({
         status: false,
@@ -1624,18 +1624,18 @@ router.get('/other/kodepos', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://kodepos-api-zhirrr.vercel.app/?q=${text}`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    var response = await fetch(`https://api.lolhuman.xyz/api/tiktokmusic?apikey=gatadios&url=${text}`);
+    var data = await response.json();
+    var { result: video } = data.result;
+    var requestSettings = {
+        url: video,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'audio/mp4');
+        res.send(body);
+    });
     limitAdd(apikey);
 })
 router.get('/other/covid-world', async (req, res, next) => {
