@@ -325,7 +325,12 @@ router.get('/download/ttsearch', async (req, res, next) => {
         (v, index) =>
           `*${index + 1}.* *Title:* ${v.title}\n*Region:* ${v.region}`,
       )
-    res.send(hasil);
+    res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        hasil
+      })
     limitAdd(apikey);
 })
 router.get('/download/pinterest', async (req, res, next) => {
