@@ -1654,7 +1654,7 @@ router.get('/other/ssweb', async (req, res, next) => {
    
 var krt = await ssweb(text)
     var requestSettings = {
-        url: krt,
+        url: krt.result,
         method: 'GET',
         encoding: null
     };
