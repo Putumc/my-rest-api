@@ -30,6 +30,7 @@ var { pinterest } = require('./../lib/scraper')
 var { ttSearch } = require('./../lib/utils/api.js');
 var { tiktok2 } = require('./../lib/utils/user.js');
 var { ig } = require('./../lib/utils/Ig.js');
+const { mediafireDl } = require('./../lib/utils/mediafire.js')
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
 const {
     limitAdd,
@@ -337,7 +338,7 @@ router.get('/download/ig', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/download/pinterest', async (req, res, next) => {
+router.get('/download/mediafire', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.q
     if (!apikey) return res.json(loghandler.noapikey)
@@ -357,17 +358,19 @@ router.get('/download/pinterest', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-   var response = await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`);
-    var requestSettings = {
-        url: response,
-        method: 'GET',
-        encoding: null
-    };
-    request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'image/png');
-        res.send(body);
-    });
-
+   mediafireDl(url)
+    .then((hasil) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        hasil
+      })
+    })
+    .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
     limitAdd(apikey);
 
 })
