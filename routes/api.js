@@ -323,12 +323,12 @@ router.get('/download/ig', async (req, res, next) => {
     });
 
       ig(url)
-    .then((res) => {
+    .then((result) => {
     res.json({
         status: true,
         code: 200,
         creator: `${creator}`,
-        res
+        result
       })
     })  
     .catch(e => {
