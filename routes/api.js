@@ -392,19 +392,19 @@ router.get('/download/tiktok', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var response = await fetch(`https://aemt.me/download/tikdl?url=${url}`);
-    var data = await response.json();
-    var { nowm: video, audio } = data.result.url;
-    var requestSettings = {
-        url: video,
-        method: 'GET',
-        encoding: null
-    };
-    request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'video/mp4');
-        res.send(body);
-    });
-
+    tiktok2(url)
+    .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
     limitAdd(apikey);
 })
 
