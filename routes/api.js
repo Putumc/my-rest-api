@@ -28,6 +28,7 @@ var creator = global.creator
 var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
 var { ttSearch } = require('./../lib/utils/api.js');
+var { tiktok2 } = require('./../lib/utils/user.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
 const {
     limitAdd,
