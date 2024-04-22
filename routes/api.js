@@ -29,6 +29,7 @@ var { BingImageCreator } = require('./../lib/utils/bingimg.js');
 var { pinterest } = require('./../lib/scraper')
 var { ttSearch } = require('./../lib/utils/api.js');
 var { tiktok2 } = require('./../lib/utils/user.js');
+var { ig } = require('./../lib/utils/Ig.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
 const {
     limitAdd,
@@ -300,7 +301,7 @@ router.get('/download/facebook', async (req, res, next) => {
     });
     limitAdd(apikey);
 })
-router.get('/download/ttsearch', async (req, res, next) => {
+router.get('/download/ig', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.url
     if (!apikey) return res.json(loghandler.noapikey)
@@ -321,15 +322,13 @@ router.get('/download/ttsearch', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 
-      var tt = await ttSearch(url);
-    var hasil = tt.videos
-       
-    .then((hasil) => {
+      ig(url)
+    .then((result) => {
     res.json({
         status: true,
         code: 200,
         creator: `${creator}`,
-        hasil
+        result
       })
     })  
     .catch(e => {
@@ -1660,7 +1659,7 @@ var krt = await ssweb(global.sh)
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'image/png');
+        res.set('Content-Type', 'image/jpg');
         res.send(body);
     });
     limitAdd(apikey);
