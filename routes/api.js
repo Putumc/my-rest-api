@@ -505,9 +505,9 @@ router.get('/download/remini', async (req, res, next) => {
 
     let random = Math.floor(Math.random() * tik.videos.length);
     let file = tik.videos[random];
-    let url = "https://tikwm.com" + file.play;
+    let url2 = "https://tikwm.com" + file.play;
      var requestSettings = {
-        url: url,
+        url: url2,
         method: 'GET',
         encoding: null
     };
