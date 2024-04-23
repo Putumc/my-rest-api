@@ -640,12 +640,12 @@ router.get('/news/jadianime', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
 imageAnime(url).then(a => {
-const bufferbyrian = Buffer.from(a.image.replace("data:image/png;base64,",""), "base64")
-}) 
+var bufferbyrian = Buffer.from(a.image.replace("data:image/png;base64,",""), "base64")
+ 
     .catch(e => {
       console.log(e);
             res.json(loghandler.error)
-        })  
+    }) 
    var requestSettings = {
         url: bufferbyrian,
         method: 'GET',
@@ -655,6 +655,7 @@ const bufferbyrian = Buffer.from(a.image.replace("data:image/png;base64,",""), "
         res.set('Content-Type', 'image/png');
         res.send(body);
     })  
+})     
     limitAdd(apikey);
 }) 
 router.get('/news/kumparan', async (req, res, next) => {
