@@ -1661,7 +1661,7 @@ router.get('/other/ssweb', async (req, res, next) => {
    global.sh = text
 var krt = await ssweb(global.sh)
     res.set({
-                'Content-Type': 'image/png'
+                'Content-Type': 'image/jpg'
             })
             res.send(krt)
     limitAdd(apikey);
