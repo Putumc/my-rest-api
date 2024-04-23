@@ -501,7 +501,40 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-           let tik = await ttSearch("Preset am anime");
+    let url2 = "https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}"
+     var requestSettings = {
+        url: url2,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    });
+    limitAdd(apikey);
+
+})
+router.get('/download/jjtiktok', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.url
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter url"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+           let tik = await ttSearch(url);
 
     let random = Math.floor(Math.random() * tik.videos.length);
     let file = tik.videos[random];
