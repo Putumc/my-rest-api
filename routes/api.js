@@ -1660,16 +1660,10 @@ router.get('/other/ssweb', async (req, res, next) => {
     });
    global.sh = text
 var krt = await ssweb(global.sh)
-    var { krt: result } = krt;
-    var requestSettings = {
-        url: result,
-        method: 'GET',
-        encoding: null
-    };
-    request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'image/jpg');
-        res.send(body);
-    });
+    res.set({
+                'Content-Type': 'image/png'
+            })
+            res.send(krt)
     limitAdd(apikey);
 })
 router.get('/other/kbbi', async (req, res, next) => {
