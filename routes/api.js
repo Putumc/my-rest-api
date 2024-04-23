@@ -501,10 +501,20 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-            res.set({
-                'Content-Type': 'image/png'
-            })
-            res.send(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`)
+           let res = await ttSearch("Preset am anime");
+
+    let random = Math.floor(Math.random() * res.videos.length);
+    let file = res.videos[random];
+    let url = "https://tikwm.com" + file.play;
+     var requestSettings = {
+        url: url,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'video/mp4');
+        res.send(body);
+    });
     limitAdd(apikey);
 
 })
