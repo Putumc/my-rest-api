@@ -488,7 +488,7 @@ router.get('/download/remini', async (req, res, next) => {
     if (!url) return res.json({
         status: false,
         creator: `${creator}`,
-        message: "masukan parameter url
+        message: "masukan parameter url"
     })
     const check = await cekKey(apikey);
     if (!check) return res.status(403).send({
