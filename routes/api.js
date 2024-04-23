@@ -1535,9 +1535,9 @@ router.get('/game/tebakgambar', async (req, res, next) => {
 })
 
 // other
-router.get('/other/github-stalk', async (req, res, next) => {
+router.get('/other/bingimg', async (req, res, next) => {
     var apikey = req.query.apikey
-    var text = req.query.username
+    var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
     if (!text) return res.json({
         status: false,
@@ -1555,10 +1555,10 @@ router.get('/other/github-stalk', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://github-api-zhirrr.vercel.app/api/detailuser?q=${text}`))
+    fetch(encodeURI(`https://bing-rulzz.cyclic.app/api/bingimg?prompt=${text}`))
         .then(response => response.json())
         .then(data => {
-            var result = data;
+            var result = data.result;
             res.json({
                 author: creator,
                 result
@@ -1570,7 +1570,7 @@ router.get('/other/github-stalk', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/other/hilih', async (req, res, next) => {
+router.get('/other/gemini', async (req, res, next) => {
     var apikey = req.query.apikey
     var text = req.query.kata
     if (!apikey) return res.json(loghandler.noapikey)
@@ -1590,10 +1590,10 @@ router.get('/other/hilih', async (req, res, next) => {
         creator: `${creator}`,
         message: "masukan parameter kata"
     })
-    fetch(encodeURI(`https://hilih-api-zhirrr.vercel.app/api/hilih?kata=${text}`))
+    fetch(encodeURI(`https://apiruulzz.my.id/api/gemini?query=${text}`))
         .then(response => response.json())
         .then(data => {
-            var result = data;
+            var result = data.result;
             res.json({
                 result
             })
