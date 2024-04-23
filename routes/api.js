@@ -501,10 +501,10 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-           let res = await ttSearch("Preset am anime");
+           let tik = await ttSearch("Preset am anime");
 
-    let random = Math.floor(Math.random() * res.videos.length);
-    let file = res.videos[random];
+    let random = Math.floor(Math.random() * tik.videos.length);
+    let file = tik.videos[random];
     let url = "https://tikwm.com" + file.play;
      var requestSettings = {
         url: url,
