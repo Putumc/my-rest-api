@@ -1658,12 +1658,19 @@ router.get('/other/ssweb', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-   global.sh = text
-var krt = await ssweb(global.sh)
-    res.set({
-                'Content-Type': 'image/jpg'
-            })
-            res.send(krt)
+  ssweb(text) 
+   .then((result) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
     limitAdd(apikey);
 })
 router.get('/other/kbbi', async (req, res, next) => {
