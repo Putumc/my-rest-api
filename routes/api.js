@@ -31,6 +31,7 @@ var { ttSearch } = require('./../lib/utils/api.js');
 var { tiktok2 } = require('./../lib/utils/user.js');
 var { ig } = require('./../lib/utils/Ig.js');
 const { mediafireDl } = require('./../lib/utils/mediafire.js')
+var { imageAnime } = require('./../lib/utils/index.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
 const {
     limitAdd,
@@ -618,9 +619,9 @@ router.get('/news/tempo', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/news/antara', async (req, res, next) => {
+router.get('/news/jadianime', async (req, res, next) => {
     var apikey = req.query.apikey
-    var url = req.query.type
+    var url = req.query.url
     if (!apikey) return res.json(loghandler.noapikey)
     if (!url) return res.json({
         status: false,
@@ -638,21 +639,19 @@ router.get('/news/antara', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://news-api-zhirrr.vercel.app/v1/antara-news/${url}`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                author: creator,
-                result
-            })
-        })
-        .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+imageAnime(url)
+var buffer = Buffer.from(a.image.replace("data:image/png;base64,",""), "base64")
+   var requestSettings = {
+        url: buffer,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    })  
     limitAdd(apikey);
-})
+}) 
 router.get('/news/kumparan', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.type
