@@ -639,8 +639,13 @@ router.get('/news/jadianime', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-imageAnime(url)
+imageAnime(url).then(a => {
 var buffer = Buffer.from(a.image.replace("data:image/png;base64,",""), "base64")
+}) 
+    .catch(e => {
+      console.log(e);
+            res.json(loghandler.error)
+        })  
    var requestSettings = {
         url: buffer,
         method: 'GET',
