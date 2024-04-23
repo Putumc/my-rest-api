@@ -1570,9 +1570,9 @@ router.get('/other/bingimg', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/other/gemini', async (req, res, next) => {
+router.get('/other/geminipro', async (req, res, next) => {
     var apikey = req.query.apikey
-    var text = req.query.kata
+    var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
     const check = await cekKey(apikey);
     if (!check) return res.status(403).send({
