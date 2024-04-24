@@ -573,7 +573,7 @@ router.get('/news/alicia', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
+    let a = await fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
     text,
   );
  
@@ -608,7 +608,7 @@ router.get('/news/gpt-web', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-     fetch(`https://itzpire.site/ai/gpt-web?q=${text}`)
+    let gpt = await fetch(`https://itzpire.site/ai/gpt-web?q=${text}`)
         .then(response => response.json())
         .then(data => {
             var result = data.gpt.result;
