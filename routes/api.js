@@ -608,10 +608,10 @@ router.get('/news/gpt-web', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let gpt = await fetch(`https://itzpire.site/ai/gpt-web?q=${text}`)
+    fetch(`https://itzpire.site/ai/gpt-web?q=${text}`)
         .then(response => response.json())
         .then(data => {
-            var result = data.gpt.result;
+            var result = data.result;
             res.json({
                 creator: `${creator}`,
                 result
