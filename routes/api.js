@@ -557,7 +557,7 @@ router.get('/news/alicia', async (req, res, next) => {
     var apikey = req.query.apikey
     var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
-    if (!url) return res.json({
+    if (!text) return res.json({
         status: false,
         creator: `${creator}`,
         message: "masukan parameter type"
@@ -590,9 +590,9 @@ router.get('/news/alicia', async (req, res, next) => {
 })
 router.get('/news/gpt-web', async (req, res, next) => {
     var apikey = req.query.apikey
-    var url = req.query.type
+    var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
-    if (!url) return res.json({
+    if (!text) return res.json({
         status: false,
         creator: `${creator}`,
         message: "masukan parameter type"
