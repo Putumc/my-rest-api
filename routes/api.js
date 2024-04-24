@@ -30,6 +30,7 @@ var { pinterest } = require('./../lib/scraper')
 var { ttSearch } = require('./../lib/utils/api.js');
 var { tiktok2 } = require('./../lib/utils/user.js');
 var { ig } = require('./../lib/utils/Ig.js');
+var { fetchData } = require('./../lib/utils/ai-alicia.js');
 const { mediafireDl } = require('./../lib/utils/mediafire.js')
 var { imageAnime } = require('./../lib/utils/index.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
@@ -552,9 +553,9 @@ router.get('/download/jjtiktok', async (req, res, next) => {
 
 })
 // news
-router.get('/news/cnn', async (req, res, next) => {
+router.get('/news/alicia', async (req, res, next) => {
     var apikey = req.query.apikey
-    var url = req.query.type
+    var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
     if (!url) return res.json({
         status: false,
@@ -572,21 +573,22 @@ router.get('/news/cnn', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://news-api-zhirrr.vercel.app/v1/cnn-news`))
-        .then(response => response.json())
-        .then(data => {
-            var result = data;
-            res.json({
-                result
+    fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
+    text,
+  );
+ 
+            var hasil = a.answer;
+             res.json({
+                creator: `${creator}`,
+                hasil
             })
-        })
         .catch(e => {
             console.log(e);
             res.json(loghandler.error)
         })
     limitAdd(apikey);
 })
-router.get('/news/cnbc', async (req, res, next) => {
+router.get('/news/gpt-web', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.type
     if (!apikey) return res.json(loghandler.noapikey)
@@ -606,11 +608,12 @@ router.get('/news/cnbc', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetch(encodeURI(`https://news-api-zhirrr.vercel.app/v1/cnbc-news`))
+     fetch(`https://itzpire.site/ai/gpt-web?q=${text}`)
         .then(response => response.json())
         .then(data => {
-            var result = data;
+            var result = data.gpt.result;
             res.json({
+                creator: `${creator}`,
                 result
             })
         })
