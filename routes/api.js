@@ -573,12 +573,11 @@ router.get('/news/alicia', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
+  let a = await fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
     text,
   );
-            .then(response => response.json())
-            .then(data => {
-            var result = data.answer;
+            
+            var result = a.answer;
              res.json({
                 creator: `${creator}`,
                 result
@@ -587,7 +586,7 @@ router.get('/news/alicia', async (req, res, next) => {
             console.log(e);
             res.json(loghandler.error)
         })
-            })       
+                   
     limitAdd(apikey);
 })
 router.get('/news/gpt-web', async (req, res, next) => {
@@ -714,23 +713,21 @@ router.get('/news/jadianime', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-imageAnime(url).then(a => {
-var bufferbyrian = Buffer.from(a.image("data:image/png;base64,",""), "base64")
- 
-    .catch(e => {
-      console.log(e);
-            res.json(loghandler.error)
-    }) 
+const apiUrl = "https://skizo.tech/api/toanime?apikey=nana&url=${url}";
+    const response = await fetch(apiUrl);
+    const buffer = await response.buffer(); // Convert the response to a buffer
+
+    if (buffer) {
    var requestSettings = {
-        url: bufferbyrian,
+        url: buffer,
         method: 'GET',
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
         res.set('Content-Type', 'image/png');
         res.send(body);
-    })  
-})     
+    })      
+    }  
     limitAdd(apikey);
 }) 
 router.get('/news/kumparan', async (req, res, next) => {
