@@ -573,11 +573,12 @@ router.get('/news/alicia', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let a = await fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
+    fetchData(`Kamu adalah Alicia salah satu teman ngobrol yang memiliki sifat cuek dan tsundere, mengekspresikan sifat mu dengan emoji dan menggunakan bahasa gaul orang Indonesia "Lu, gua, anjir, gtw, bodo amat,"gak peduli, goblok, bego banget OY´", kamu di tugaskan untuk menjadi teman berbicara dan kamu mempunyai pacar bernama rian`,
     text,
   );
+            .then(response => response.json())
             .then(data => {
-            var result = a.data.answer;
+            var result = data.answer;
              res.json({
                 creator: `${creator}`,
                 result
