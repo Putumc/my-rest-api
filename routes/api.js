@@ -489,20 +489,20 @@ router.get('/download/remini', async (req, res, next) => {
     if (!url) return res.json({
         status: false,
         creator: `${creator}`,
-        message: "masukan parameter url"
+        message: "masukan parameter url📩"
     })
     const check = await cekKey(apikey);
     if (!check) return res.status(403).send({
         status: 403,
         message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
-        result: "error"
+        result: "error😴"
     });
     let limit = await isLimit(apikey);
     if (limit) return res.status(403).send({
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    let url2 = "https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}"
+    var url2 = await (await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`)) 
      var requestSettings = {
         url: url2,
         method: 'GET',
