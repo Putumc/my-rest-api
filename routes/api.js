@@ -587,6 +587,7 @@ router.get('/news/alicia', async (req, res, next) => {
             console.log(e);
             res.json(loghandler.error)
         })
+            })       
     limitAdd(apikey);
 })
 router.get('/news/gpt-web', async (req, res, next) => {
