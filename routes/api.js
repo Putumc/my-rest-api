@@ -34,6 +34,7 @@ var { fetchData } = require('./../lib/utils/ai-alicia.js');
 const { mediafireDl } = require('./../lib/utils/mediafire.js')
 var { imageAnime } = require('./../lib/utils/index.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
+var { tiktokserch2 } = require('./../lib/utils/Viralkan.js');
 const {
     limitAdd,
     isLimit,
@@ -1745,15 +1746,49 @@ router.get('/other/ssweb', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-router.get('/other/kbbi', async (req, res, next) => {
+router.get('/other/tiktoksearch', async (req, res, next) => {
     var apikey = req.query.apikey
-    var text = req.query.kata
+    var text = req.query.text
     if (!apikey) return res.json(loghandler.noapikey)
     if (!text) return res.json({
         status: false,
         creator: `${creator}`,
         message: "masukan parameter kata"
     })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+  tiktokserch2(text)
+        .then(data => {
+            var result = data;
+            res.json({
+                result
+            })
+        })
+        .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    limitAdd(apikey);
+})
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    limitAdd(apikey);
+})
+
+router.get('/other/djviral', async (req, res, next) => {
+    var apikey = req.query.apikey
+    if (!apikey) return res.json(loghandler.noapikey)
     const check = await cekKey(apikey);
     if (!check) return res.status(403).send({
         status: 403,
