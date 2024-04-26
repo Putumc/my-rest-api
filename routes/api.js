@@ -1779,12 +1779,6 @@ router.get('/other/tiktoksearch', async (req, res, next) => {
         })
     limitAdd(apikey);
 })
-    .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
-    limitAdd(apikey);
-})
 
 router.get('/other/djviral', async (req, res, next) => {
     var apikey = req.query.apikey
