@@ -725,9 +725,9 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var url2 = await (await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`)) 
+    var remini = await (await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`)).buffer();
      var requestSettings = {
-        url: url2,
+        url: remini,
         method: 'GET',
         encoding: null
     };
