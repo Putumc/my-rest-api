@@ -727,7 +727,7 @@ router.get('/download/remini', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
         var requestSettings = {
-        url: processing(url, "enhance"),
+        url: `https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`,
         method: 'GET',
         encoding: null
     };
