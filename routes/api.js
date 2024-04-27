@@ -733,7 +733,7 @@ router.get('/download/remini', async (req, res, next) => {
         encoding: null
     };
     request(requestSettings, function (error, response, body) {
-        res.set('Content-Type', 'image/jpg');
+        res.set('Content-Type', 'image/png');
         res.send(body);
     });
     limitAdd(apikey);
