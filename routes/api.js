@@ -727,15 +727,9 @@ router.get('/download/remini', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     var This = await processing(url, "enhance");
-     var requestSettings = {
-        url: This,
-        method: 'GET',
-        encoding: null
-    };
-    request(requestSettings, function (error, response, body) {
         res.set('Content-Type', 'image/png');
-        res.send(body);
-    });
+        res.send(This);
+    
     limitAdd(apikey);
 
 })
