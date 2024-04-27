@@ -377,6 +377,222 @@ router.get('/download/mediafire', async (req, res, next) => {
     limitAdd(apikey);
 
 })
+router.get('/download/ig', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.url
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter username"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+
+      ig(url)
+    .then((result) => {
+    res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })  
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    limitAdd(apikey);
+})
+router.get('/download/mediafire', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.q
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter q"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+   mediafireDl(url)
+    .then((hasil) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        hasil
+      })
+    })
+    .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
+    limitAdd(apikey);
+
+})
+router.get('/download/ig', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.url
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter username"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+
+      ig(url)
+    .then((result) => {
+    res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })  
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    limitAdd(apikey);
+})
+router.get('/download/playmp3', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.text
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter q"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+   ytPlayMp3(url)
+        .then((result) => {
+        res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      }) 
+        })     
+    .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
+    limitAdd(apikey);
+
+})
+router.get('/download/playmp4', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.text
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter username"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+
+      ytPlayMp4(url)
+        .then((result) => {
+    res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        result
+      })
+    })  
+    .catch(e => {
+            console.log(e);
+            res.json(loghandler.error)
+        })
+    limitAdd(apikey);
+})
+router.get('/download/mediafire', async (req, res, next) => {
+    var apikey = req.query.apikey
+    var url = req.query.q
+    if (!apikey) return res.json(loghandler.noapikey)
+    if (!url) return res.json({
+        status: false,
+        creator: `${creator}`,
+        message: "masukan parameter q"
+    })
+    const check = await cekKey(apikey);
+    if (!check) return res.status(403).send({
+        status: 403,
+        message: `apikey ${apikey} not found, please register first! https://${req.hostname}/users/signup`,
+        result: "error"
+    });
+    let limit = await isLimit(apikey);
+    if (limit) return res.status(403).send({
+        status: 403,
+        message: 'your limit has been exhausted, reset every 12 PM'
+    });
+   mediafireDl(url)
+    .then((hasil) => {
+      res.json({
+        status: true,
+        code: 200,
+        creator: `${creator}`,
+        hasil
+      })
+    })
+    .catch(e => {
+        console.log(e);
+        res.json(loghandler.error)
+    }) 
+    limitAdd(apikey);
+
+})
 router.get('/download/tiktok', async (req, res, next) => {
     var apikey = req.query.apikey
     var url = req.query.url
