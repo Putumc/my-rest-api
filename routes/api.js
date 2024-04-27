@@ -946,7 +946,6 @@ router.get('/news/jadianime', async (req, res, next) => {
         res.set('Content-Type', 'image/png');
         res.send(body);
     })      
-        }) 
     limitAdd(apikey);
 }) 
 router.get('/news/kumparan', async (req, res, next) => {
