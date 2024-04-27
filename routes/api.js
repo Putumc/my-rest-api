@@ -1,4 +1,4 @@
-// Gada reupload" 😏
+// Gada reupload" :v
 // Klo mau colong fitur, jgn asal colong bodoh ntr api lu eror
 
 // Thanks to ( jgn di hapus jamet)
