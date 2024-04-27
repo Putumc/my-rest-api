@@ -726,9 +726,8 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var com = await processing(url, "enhance");
         var requestSettings = {
-        url: com,
+        url: processing(url, "enhance"),
         method: 'GET',
         encoding: null
     };
