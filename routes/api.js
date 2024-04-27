@@ -802,7 +802,6 @@ router.get('/news/alicia', async (req, res, next) => {
             
             var result = a.answer;
              res.json({
-                creator: `${creator}`,
                 result
             })
         .catch(e => {
