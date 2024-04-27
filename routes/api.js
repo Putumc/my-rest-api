@@ -937,7 +937,7 @@ router.get('/news/jadianime', async (req, res, next) => {
         message: 'your limit has been exhausted, reset every 12 PM'
     });
     fetch(encodeURI(`https://skizo.tech/api/toanime?apikey=nana&url=${url}`))
-        .then(response => response.json())
+        .then(response => response.buffer())
         .then(data => {
             var result = data;
    var requestSettings = {
