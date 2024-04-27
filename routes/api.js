@@ -79,6 +79,12 @@ router.get('/cekapikey', async (req, res, next) => {
         limit: limit
     });
 })
+router.get('/ping', async (req, res, next) => {
+    
+    res.send({
+        status: 200,
+    });
+})
 // cecan
 router.get('/cecan/china', async (req, res, next) => {
     var apikey = req.query.apikey
