@@ -35,6 +35,7 @@ const { mediafireDl } = require('./../lib/utils/mediafire.js')
 var { imageAnime } = require('./../lib/utils/index.js');
 var { ssweb } = require('./../lib/utils/ssweb (1).js');
 var { tiktokserch2 } = require('./../lib/utils/Viralkan.js');
+var { processing } = require('./../lib/utils/Anakay.js');
 const {
     limitAdd,
     isLimit,
@@ -725,9 +726,9 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var remini = await (await fetch(`https://api.lolhuman.xyz/api/upscale?apikey=gatadios&img=${url}`)).buffer();
+    var This = await processing(url, "enhance");
      var requestSettings = {
-        url: remini,
+        url: This,
         method: 'GET',
         encoding: null
     };
