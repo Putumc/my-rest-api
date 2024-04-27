@@ -728,7 +728,7 @@ router.get('/download/remini', async (req, res, next) => {
     });
     var This = await processing(url, "enhance");
         res.set('Content-Type', 'image/png');
-        res.send(This);
+        res.send(url);
     
     limitAdd(apikey);
 
