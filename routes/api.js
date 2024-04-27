@@ -726,10 +726,16 @@ router.get('/download/remini', async (req, res, next) => {
         status: 403,
         message: 'your limit has been exhausted, reset every 12 PM'
     });
-    var This = await processing(url, "enhance");
+    var com = await processing(url, "enhance");
+        var requestSettings = {
+        url: com,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
         res.set('Content-Type', 'image/png');
-        res.send(url);
-    
+        res.send(body);
+    });
     limitAdd(apikey);
 
 })
@@ -936,7 +942,7 @@ const apiUrl = "https://skizo.tech/api/toanime?apikey=nana&url=${url}";
 
     if (buffer) {
    var requestSettings = {
-        url: buffer,
+        url: apiUrl,
         method: 'GET',
         encoding: null
     };
