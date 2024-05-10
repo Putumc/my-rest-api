@@ -1949,17 +1949,17 @@ router.get('/other/ssweb', async (req, res, next) => {
     });
   ssweb(text) 
    .then((result) => {
-      res.json({
-        status: true,
-        code: 200,
-        creator: `${creator}`,
-        result
-      })
+      var requestSettings = {
+        url: result,
+        method: 'GET',
+        encoding: null
+    };
+    request(requestSettings, function (error, response, body) {
+        res.set('Content-Type', 'image/png');
+        res.send(body);
+    });
     })
-    .catch(e => {
-            console.log(e);
-            res.json(loghandler.error)
-        })
+    
     limitAdd(apikey);
 })
 router.get('/other/tiktoksearch', async (req, res, next) => {
