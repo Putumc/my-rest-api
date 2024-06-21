@@ -20,7 +20,7 @@ async function limitAdd(apikey) {
    let key = await User.findOne({
       apikey: apikey
    });
-   let min = key.limit - 1;
+   let min = key.limit - 5;
    User.updateOne({
       apikey: apikey
    }, {
